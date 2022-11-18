@@ -1,6 +1,6 @@
 import torch
 from torch import autocast
-from diffusers import StableDiffusionInpaintPipeline, LMSDiscreteScheduler
+from diffusers import StableDiffusionInpaintPipeline
 import base64
 from io import BytesIO
 import os
@@ -14,7 +14,7 @@ def init():
     HF_AUTH_TOKEN = os.getenv("HF_AUTH_TOKEN")
     
     # this will substitute the default PNDM scheduler for K-LMS  
-    lms = LMSDiscreteScheduler(beta_start=0.00085, beta_end=0.012, beta_schedule="scaled_linear")
+    #lms = LMSDiscreteScheduler(beta_start=0.00085, beta_end=0.012, beta_schedule="scaled_linear")
 
     model = StableDiffusionInpaintPipeline.from_pretrained("runwayml/stable-diffusion-inpainting",revision="fp16",torch_dtype=torch.float16, use_auth_token=HF_AUTH_TOKEN).to("cuda")
 
