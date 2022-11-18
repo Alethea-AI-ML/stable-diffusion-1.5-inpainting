@@ -1,6 +1,6 @@
 import torch
 from torch import autocast
-from diffusers import StableDiffusionPipeline, LMSDiscreteScheduler
+from diffusers import StableDiffusionInpaintPipeline, LMSDiscreteScheduler
 import base64
 from io import BytesIO
 import os
@@ -16,7 +16,7 @@ def init():
     # this will substitute the default PNDM scheduler for K-LMS  
     lms = LMSDiscreteScheduler(beta_start=0.00085, beta_end=0.012, beta_schedule="scaled_linear")
 
-    model = StableDiffusionPipeline.from_pretrained("runwayml/stable-diffusion-inpainting", scheduler=lms, use_auth_token=HF_AUTH_TOKEN).to("cuda")
+    model = StableDiffusionInpaintPipeline.from_pretrained("runwayml/stable-diffusion-inpainting",revision="fp16",torch_dtype=torch.float16, use_auth_token=HF_AUTH_TOKEN).to("cuda")
 
 # Inference is ran for every server call
 # Reference your preloaded global model variable here.
