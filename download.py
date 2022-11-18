@@ -16,7 +16,7 @@ def download_model():
     )
 
     model = StableDiffusionPipeline.from_pretrained(
-        "CompVis/stable-diffusion-v1-4", 
+        "runwayml/stable-diffusion-inpainting", 
         scheduler=lms,
         use_auth_token=HF_AUTH_TOKEN
     )
