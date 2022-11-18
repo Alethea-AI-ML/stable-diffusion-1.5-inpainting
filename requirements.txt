@@ -3,3 +3,4 @@ diffusers==0.2.3
 transformers
 scipy
 pillow
+urllib3
