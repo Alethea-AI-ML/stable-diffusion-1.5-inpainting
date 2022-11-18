@@ -5,6 +5,7 @@ import base64
 from io import BytesIO
 import os
 from PIL import Image
+import urllib.request
 
 # Init is ran on server startup
 # Load your model to GPU as a global variable here using the variable name "model"
@@ -26,9 +27,12 @@ def inference(model_inputs:dict) -> dict:
     prompt = model_inputs.get('prompt', None)
     image = model_inputs.get('image', None)
     mask_image = model_inputs.get('mask_image', None)
-    image=Image.open(image)
-    mask_image=Image.open(mask_image)
-    
+    #image=Image.open(image)
+    #mask_image=Image.open(mask_image)
+    with urllib.request.urlopen(image) as url:
+        image = Image.open(url)
+    with urllib.request.urlopen(mask_image) as url1:
+        mask_image = Image.open(url1)
     
     if prompt == None:
         return {'message': "No prompt provided"}
