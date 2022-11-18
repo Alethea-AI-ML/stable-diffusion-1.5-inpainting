@@ -9,6 +9,8 @@ import os
 os.environ['HF_AUTH_TOKEN'] = "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"
 import app as user_src
 
+from time import time
+
 # We do the model load-to-GPU step on server startup
 # so the model object is available globally for reuse
 user_src.init()
@@ -34,10 +36,11 @@ def inference(request):
         model_inputs = response.json.loads(request.json)
     except:
         model_inputs = request.json
-
+    start = time()
     output = user_src.inference(model_inputs)
-
-    return response.json(output)
+    total_time = time() - start
+    return response.json({"output":output, "total_time": total_time})
+    # return response.json(output)
 
 
 if __name__ == '__main__':
