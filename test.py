@@ -5,6 +5,7 @@ import requests
 import base64
 from io import BytesIO
 from PIL import Image
+import sanic
 
 model_inputs = {'prompt': 'realistic field of grass'}
 
