@@ -1,6 +1,7 @@
 sanic==22.6.2
 diffusers
 transformers
+torch
 scipy
 pillow
 urllib3
